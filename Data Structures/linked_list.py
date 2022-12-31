@@ -36,9 +36,18 @@ class LinkedList:
         node.next = self.root.next
         self.root.next = node
 
+    def insert_pos(self, node, pos):
+        temp = self.root
+        for _ in range(pos+1):
+            temp = temp.next
+        node.next = temp.next
+        temp.next = node
+
     def get_node_at_pos(self, pos):
         temp = self.root
         for _ in range(pos+1):
+            if not temp.next:
+                return
             temp = temp.next
         return temp
 
@@ -73,7 +82,6 @@ class LinkedList:
             temp = temp.next
         return True
 
-
 if __name__ == "__main__":
     l1 = LinkedList()
     for i in range(0, 12):
@@ -84,6 +92,6 @@ if __name__ == "__main__":
     print(l1.get_node_at_pos(1))
     print(l1.get_middle())
     print(l1.middle())
-    print(l1.is_sorted())
-    l1.insert_beginning(Node(999))
-    print(l1.is_sorted())
+    print(l1)
+    l1.insert_pos(Node(999), 2)
+    print(l1)
